@@ -1,55 +1,28 @@
+const faker = require('faker');
+
+const data = [];
+
+for (let i = 0; i < 30; i++) {
+  const nome = faker.name.firstName() + ' ' + faker.name.lastName();
+  const ativo = faker.random.boolean();
+  const email = faker.internet.userName() + '@' + faker.internet.domainName();
+  const role = faker.random.arrayElement(['docente', 'estudante']);
+  const createdAt = new Date();
+  const updatedAt = new Date();
+
+  data.push({
+    nome,
+    ativo,
+    email,
+    role,
+    createdAt,
+    updatedAt,
+  });
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-		return queryInterface.bulkInsert('pessoas', [
-			{
-				nome: 'Ana Souza',
-				ativo: true,
-				email: 'ana@ana.com',
-				role: 'estudante',
-				createdAt: new Date(),
-				updatedAt: new Date()
-			},
-			{
-				nome: 'Marcos Cintra',
-				ativo: true,
-				email: 'marcos@marcos.com',
-				role: 'estudante',
-				createdAt: new Date(),
-				updatedAt: new Date()
-			},
-			{
-				nome: 'Felipe Cardoso',
-				ativo: true,
-				email: 'felipe@felipe.com',
-				role: 'estudante',
-				createdAt: new Date(),
-				updatedAt: new Date()
-			},
-			{
-				nome: 'Sandra Gomes',
-				ativo: false,
-				email: 'sandra@sandra.com',
-				role: 'estudante',
-				createdAt: new Date(),
-				updatedAt: new Date()
-			},
-			{
-				nome: 'Paula Morais',
-				ativo: true,
-				email: 'paula@paula.com',
-				role: 'docente',
-				createdAt: new Date(),
-				updatedAt: new Date()
-			},
-			{
-				nome: 'Sergio Lopes',
-				ativo: true,
-				email: 'sergio@sergio.com',
-				role: 'docente',
-				createdAt: new Date(),
-				updatedAt: new Date()
-			}
-	], {})
+		return queryInterface.bulkInsert('pessoas', data, {})
   },
 
   down: (queryInterface, Sequelize) => {
